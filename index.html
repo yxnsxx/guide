@@ -3,837 +3,1323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>퍼블리싱 가이드</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <title>코딩리스트</title>
     <style>
-        html, body, div, ul, li, p, h1, h2, h3, h4, h5, h6, table, thead, tbody, tr, th, td,
-        form, fieldset, button, select, textarea, input, fieldset, legend, label, a, span, strong, em, address, dfn, small, i, b, ::before, ::after {margin:0; padding:0; border:0; list-style:none; color:inherit; font-style:normal; font-size:100%; font-weight:inherit; font-family:inherit; line-height:inherit; word-break:inherit; word-wrap:inherit; box-sizing:border-box; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -o-box-sizing:border-box;}
-        article, aside, canvas, details, figure, figcaption, footer, header, menu, nav, section { display:block; }
-        body { font-family: 'Noto Sans KR', sans-serif; font-size:16px; font-weight:400; line-height:1; word-break:keep-all; word-wrap:word-break; -webkit-text-size-adjust: none; -moz-text-size-adjust: none; -ms-text-size-adjust: none;}
-        html[lang=ja] body, html[lang=zh] body {word-break:normal;}
-        [hidden], hr {display:none;}
-        img {vertical-align:middle;}
-        button {background-color:transparent; cursor:pointer;}
-        b, strong {font-weight:bold;}
-        fieldset, iframe {width:100%;}
-        img, a, frame, iframe, fieldset {border:0;}
-        a {text-decoration:none;}
-        table {width:100%; border-spacing:0; border-collapse:collapse;}
-        caption {height:1px; overflow:hidden;}
-        legend {position:absolute; left:-9999em; top:-9999em;}
-        button {overflow:hidden; background-color:transparent; cursor:pointer;}
+        /* NotoSans */
+        @font-face {
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 300;
+        src: url('pc/AsianPlatformInternet/font/NotoSansKR-Regular.eot');
+        src: local('Noto Sans KR Light'), url('pc/AsianPlatformInternet/#iefix') format('embedded-opentype'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Light.woff2') format('woff2'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Light.woff') format('woff'),
+            url('../../NotoSansKR-Light.ttf') format('truetype');
+        }
+        @font-face {
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 400;
+        src: url('pc/AsianPlatformInternet/font/NotoSansKR-Regular.eot');
+        src: local('Noto Sans KR Regular'), url('pc/AsianPlatformInternet/font/NotoSansKR-Regular.eot?#iefix') format('embedded-opentype'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Regular.woff2') format('woff2'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Regular.woff') format('woff'),
+            url('../../NotoSansKR-Regular.ttf') format('truetype');
+        }
+        @font-face {
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 500;
+        src: url('pc/AsianPlatformInternet/font/NotoSansKR-Medium.eot');
+        src: local('Noto Sans KR Medium'), url('pc/AsianPlatformInternet/font/NotoSansKR-Medium.eot?#iefix') format('embedded-opentype'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Medium.woff2') format('woff2'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Medium.woff') format('woff'),
+            url('../../NotoSansKR-Medium.ttf') format('truetype');
+        }
+        @font-face {
+        font-family: 'Noto Sans KR';
+        font-style: normal;
+        font-weight: 700;
+        src: url('pc/AsianPlatformInternet/font/NotoSansKR-Bold.eot');
+        src: local('Noto Sans KR Bold'), url('pc/AsianPlatformInternet/font/NotoSansKR-Bold.eot?#iefix') format('embedded-opentype'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Bold.woff2') format('woff2'),
+            url('pc/AsianPlatformInternet/font/NotoSansKR-Bold.woff') format('woff'),
+            url('../../NotoSansKR-Bold.ttf') format('truetype');
+        }
+        body { text-align: center; padding: 60px 40px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; }
+        a { color: #000; text-decoration: none; }
+        .cl-info-area {display: flex;position: relative;width: 100%;flex-direction: column;box-sizing: border-box;}
+        .cl-info-area .project-tit { margin: 0 0 10px; }
+        .cl-info-area .cl-info-group {  }
+        .cl-info-area .cl-info-group .cl-info {  }
+        .cl-info-area .cl-info-group .cl-info.ui-all-number {  }
+        .cl-info-area .cl-info-group .cl-info.ui-ing-number {  }
+        .cl-info-area .cl-info-group .cl-info.ui-end-number {  }
+        .cl-info-area .cl-info-group .cl-info.ui-percent-number {  }
+        .cl-info-area .cp-guide { display: inline-block; color: #fff; background: #002d71; font-weight: bold; padding: 10px 25px; border-radius: 22px; margin: 20px 0 30px; }
 
-        .g-header { position:fixed; z-index:100; display:flex; flex-wrap: wrap; align-items: center; width:100%; height:60px; background-color: #222; color:#fff; padding: 0 40px; }
-        .g-header .g-logo { font-size: 20px; }
-        .g-container {  }
-        .g-aside { position:fixed; top:60px; left:0; bottom:0; z-index:102; width:250px; overflow:hidden; background:#fff; border-right:1px solid #ddd; transform:translate(0, 0); -webkit-transform:translate(0, 0); -moz-transform:translate(0, 0); -ms-transform:translate(0, 0); -o-transform:translate(0, 0); transition:transform 0.3s ease-out; -webkit-transition:transform 0.3s ease-out;}
-        .g-aside .g-aside-scroll {height:calc(100% - 60px); overflow:auto;}
-        .g-btn-aside {display:inline-block; position:relative; width:20px; height:100%; margin-right: 20px; color:transparent; vertical-align:middle;}
-        .g-btn-aside:before, .g-btn-aside:after {content:''; }
-        .g-btn-aside:before, .g-btn-aside:after, .g-btn-aside span {display:block; position:absolute; left:50%; top:50%; width:20px; height:2px; background: #fff; overflow:hidden; transform:translate(-50%, -50%); -webkit-transform:translate(-50%, -50%); -moz-transform:translate(-50%, -50%); -ms-transform:translate(-50%, -50%); -o-transform:translate(-50%, -50%);}
-        .g-btn-aside:before {margin-top:-6px;}
-        .g-btn-aside:after {margin-top:6px;}
-        .g-snb { padding: 50px 40px 0; }
-        .g-snb>li { color:#777; font-size: 18px;  position: relative; }
-        .g-snb>li:not(:last-child) { margin-bottom: 28px; }
-        .g-snb>li>a { color:#777; font-size: 18px; }
-        .g-snb>li:hover>a,
-        .g-snb>li.on>a { color:#0F87C4; font-weight: bold;}
-        .g-snb>li.on>a::after { content: ''; position: absolute; top: 50%; right: 0; margin-top: -1px; width: 8px; height: 8px; border: 2px solid #0F87C4; border-width: 1px 1px 0 0; transform: rotate(45deg) translate(0, -50%); }
-        .g-inner-snb { position: absolute; background: #f5f5f5; width: 100%; padding: 16px; border-radius: 8px; margin: 16px 0 0; }
-        .g-inner-snb>li {  }
-        .g-inner-snb>li:not(:last-child) { margin-bottom: 8px; }
-        .g-inner-snb>li>a { font-size: 14px; }
-        .g-inner-snb>li:hover>a,
-        .g-inner-snb>li.on>a { color:#000; font-weight: bold;}
-        .g-content { background: #fff; padding-left: 250px; padding-top: 60px; transition: all 0.3s; }
-        .g-content-item { margin: 0 40px; padding: 60px 0;}
-        .g-content-item:not(:first-child) { border-top: 1px solid #ddd; }
-        .g-content-header { padding: 0 0 50px; font-size: 40px; font-weight: bold; }
-        .g-content-body {  }
-        .g-section:not(:first-child) { margin-top: 60px; }
-        .g-section-header { font-size: 28px; color: #0F87C4; position: relative; margin: 0 0 30px 0; padding: 0 0 0 16px; }
-        .g-section-header::before { content: ''; position: absolute; top: 1px; left: 0; width: 4px; height: 28px; background-color: #0F87C4; }
-        .g-section-body {  }
-        .g-section-tb-tit { margin: 30px 0 20px; font-size: 22px; font-weight: bold; }
-        .g-section-tb { border-collapse: collapse; border-spacing: 0; border-top: 1px solid #000; border-bottom: 1px solid #000; }
-        .g-section-tb tr:not(:last-child) { border-bottom: 1px solid #ddd; }
-        .g-section-tb th, td { border-left: 1px solid #ddd; padding: 15px; }
-        .g-section-tb th { background-color: #f3f3f3; font-weight: bold; }
-        .g-section-tb th:first-child,
-        .g-section-tb td:first-child { border-left: none; }
-        .g-style-list {  }
-        .g-style-item + .g-style-item { margin-top: 40px; }
-        .g-style-tit { font-size: 22px; font-weight: bold; margin-bottom: 30px; }
-        .g-style-subtit { font-size: 18px; font-weight: bold; margin-bottom: 20px; }
-        div + .g-style-subtit { margin-top: 40px; }
+        .scrolled .cl-info-area{flex-direction: row;align-items: center;justify-content: space-between;position: fixed;top:0;left: 0;padding:10px 40px;background-color: rgba(255, 255, 255, .8);box-shadow: 0.968px 3.881px 8px 0px rgba(0, 0, 0, 0.2);}
+        .scrolled .cl-info-area .project-tit{margin: 0;}
+        .scrolled .cl-info-area .cp-guide{margin: 0;}
+        select#tdSelect {position: relative;margin:0 10px;padding: 10px}
 
-        .d-flex { display: flex; }
-        .tac { text-align: center; }
-
-        .rule_code {  }
-        .rule_code li { position: relative; padding-left: 15px; min-height: 24px; }
-        .rule_code li::before { background-color: #000; border-radius: 50%; content: ''; display: block; height: 4px; left: 0; position: absolute; top: 10px; width: 4px; } 
-        .rule_code li:not(:last-child) { margin-bottom: 5px; }
-        .code_label { background-color: #f7f7f7; border: 1px dashed #333; border-radius: 2px; box-sizing: border-box; color: #333; display: inline-block; font-family: 'Source Code Pro', 'Noto Sans KR', monospace; font-size: 14px; margin: 1px 3px; padding: 3px 5px; }
-
-        .g-style-colors { display: flex; gap: 24px; margin-bottom: 60px; }
-        .g-style-colors .g-style-color { position: relative; box-shadow: 0px 2px 10px 0px #0000001A; width: 120px; padding: 76px 0 0; border-radius: 8px; overflow: hidden; }
-        .g-style-colors .g-style-color.c-00008F { background-color: #00008F; }
-        .g-style-colors .g-style-color.c-2B7DA7 { background-color: #2B7DA7; }
-        .g-style-colors .g-style-color.c-2A98A8 { background-color: #2A98A8; }
-        .g-style-colors .g-style-color.c-627F94 { background-color: #627F94; }
-        .g-style-colors .g-style-color.c-FF1721 { background-color: #FF1721; }
-        .g-style-colors .g-style-color.c-0F87C4 { background-color: #0F87C4; }
-        .g-style-colors .g-style-color.c-FF9900 { background-color: #FF9900; }
-        .g-style-colors .g-style-color.c-F55B5B { background-color: #F55B5B; }
-        .g-style-colors .g-style-color.c-E4EDFB { background-color: #E4EDFB; }
-        .g-style-colors .g-style-color.c-F5E6EC { background-color: #F5E6EC; }
-        .g-style-colors .g-style-color.c-DCEFF3 { background-color: #DCEFF3; }
-        .g-style-colors .g-style-color.c-F9F7D8 { background-color: #F9F7D8; }
-        .g-style-colors .g-style-color.c-000000 { background-color: #000000; }
-        .g-style-colors .g-style-color.c-343C3D { background-color: #343C3D; }
-        .g-style-colors .g-style-color.c-5F5F5F { background-color: #5F5F5F; }
-        .g-style-colors .g-style-color.c-999999 { background-color: #999999; }
-        .g-style-colors .g-style-color.c-FAFAFA { background-color: #FAFAFA; }
-        .g-style-colors .g-style-color.c-F5F5F5 { background-color: #F5F5F5; }
-        .g-style-colors .g-style-color.c-DDDDDD { background-color: #DDDDDD; }
-        .g-style-colors .g-style-color.c-F0F0F0 { background-color: #F0F0F0; }
-        .g-style-colors .g-style-color.c-E4F4FC { background-color: #E4F4FC; }
-        .g-style-colors .g-style-color.c-FFF7E2 { background-color: #FFF7E2; }
-        .g-style-colors .g-style-color.c-FFE2E2 { background-color: #FFE2E2; }
-        .g-style-colors .g-style-color-explain { padding: 10px; line-height: 22px; background-color: #fff; }
-        .g-style-colors .g-style-color-explain-float { position: absolute; bottom: 72px; left: 15px; line-height: 22px; }
-        .g-style-colors .g-style-color.c-E4F4FC .g-style-color-explain-float { color: #0F87C4; }
-        .g-style-colors .g-style-color.c-FFF7E2 .g-style-color-explain-float { color: #FF9900; }
-        .g-style-colors .g-style-color.c-FFE2E2 .g-style-color-explain-float { color: #F55B5B; }
-        
-        .g-style-item.typo .g-style-tb { border-collapse: collapse; border-spacing: 0; border-top: 1px solid #000; border-bottom: 1px solid #000; }
-        .g-style-item.typo .g-style-tb th { border-left: 1px solid #f3f3f3; padding: 15px; background-color: #f3f3f3; font-weight: bold; }
-        .g-style-item.typo .g-style-tb td { border-left: 1px solid #fff; padding: 15px; font-size: 18px; }
-        .g-style-item.typo .g-style-tb thead {  }
-        .g-style-item.typo .g-style-tb thead th {  }
-        .g-style-item.typo .g-style-tb tbody {  }
-        .g-style-item.typo .g-style-tb tbody td {  }
-        .g-style-item.typo .g-style-tb th:first-child,
-        .g-style-item.typo .g-style-tb td:first-child { border-left: none; }
-        .g-style-item.typo .g-style-tb tbody td.typo-w-b { font-weight: 700; }
-        .g-style-item.typo .g-style-tb tbody td.typo-w-m { font-weight: 500; }
-        .g-style-item.typo .g-style-tb tbody td.typo-w-r { font-weight: 400; }
-        .g-style-item.type .g-style-tb td { padding: 20px; }
-        .g-style-item.type .g-style-tb td:first { text-align: center; }
-        .g-style-item.scale .g-style-tb tr:not(:last-child) { border-bottom: 1px solid #ddd; }
-        .g-style-item.scale .g-style-tb td { font-size: 20px; font-weight: 500; text-align: center; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-1 { font-size: 26px; font-weight: 700; line-height: 34px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-2 { font-size: 24px; font-weight: 700; line-height: 32px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-3 { font-size: 20px; font-weight: 700; line-height: 28px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-4 { font-size: 18px; font-weight: 700; line-height: 26px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-5 { font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-6 { font-size: 15px; font-weight: 400; line-height: 21px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-7 { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td.typo-s-8 { font-size: 12px; font-weight: 400; line-height: 18px; letter-spacing: -0.03em; }
-        .g-style-item.scale .g-style-tb tbody td .s_txt { font-size: 14px; color: #666; margin-top: 8px;}
-        
-        .ex-btn { width: 350px; height: 55px; }
-        .ex-btn button { width: 100%; height: 100%; color: #fff; font-size: 16px; background-color: #2B7DA7; }
-        .ex-btn.two_btn { display: flex; }
-        .ex-btn.two_btn button:nth-child(2) { background-color: #364E68; }
-        .ex-btn.medium { width: 272px; height: 48px; }
-        .ex-btn.medium button { border-radius: 8px; }
-        .ex-btn.outline button { color: #5f5f5f; background-color: #fff; border: 1px solid #ddd; }
-        .ex-btn.medium.two_btn { width: 178px; height: 40px; }
-        .ex-btn.medium.two_btn button { font-size: 14px; color: #5f5f5f; background-color: #fff; border: 1px solid #ddd; border-radius: 0; }
-        .ex-btn.medium.two_btn button:nth-child(2) { color: #fff; background-color: #2B7DA7; border: none; margin-left: 8px; }
-
-        .g-style-item.input .d-flex { gap: 80px; }
-        .g-style-item.radio .d-flex { gap: 80px; }
-        input { border: none; }
-        input:focus { outline: none; }
-        input::placeholder { color: #999; }
-        .ex-input { font-size: 15px; font-weight: 500; color: #343c3d; border-bottom: 1px solid #999; padding: 18px 0; }
-        .ex-input.focus,
-        .ex-input:focus { color: #2B7DA7; border-bottom: 1px solid #2B7DA7; }
-        .two_input { display: flex; gap: 16px; align-items: center; }
-        .two_input .dash { width: 5px; height: 2px; background-color: #000; }
-
-        /* radio */
-        .ex-input-radio{position:relative;display:inline-block;padding:0 0 0 28px;line-height: 21px;}
-        .ex-input-radio *{vertical-align:middle}
-        .ex-input-radio:after{width:0;height:0;content:'';background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_radio_checked_blue2.png);background-repeat: no-repeat;background-size:20px;}
-        .ex-input-radio label{font-size:15px;vertical-align:0}
-        .ex-input-radio input{line-height:1;position:absolute;top:1px;left:0;display:inline-block;width:20px;height:20px;padding:0;border:0;border-radius:0;outline:0;background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_radio_default.png);background-repeat: no-repeat;background-size:20px;-webkit-appearance:none;-moz-appearance:none;appearance:none}
-        .ex-input-radio input:checked{background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_radio_checked_blue2.png);}
-        .ex-input-radio input:checked+label{font-weight:700;color:#343c3d}
-        .ex-input-radio input:disabled{background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_radio_disabled.png);}
-        .ex-input-radio input:disabled:checked{background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_radio_disabled_checked.png);}
-        .ex-input-radio input:disabled+label{color:#999}
-        .ex-input-radio input:focus{outline:#000 dotted 0}
-        .ex-input-radio input:checked:focus{outline:#000 dotted 0}
-        .ex-input-radio input:checked:focus+label{font-weight:700;color:#343c3d}
-        .ex-input-radio input:checked:focus+label:before{outline:#000 dotted 0}
-        
-        /* checkbox */
-        .ex-input-check{position:relative;display:inline-block;padding:0 0 0 28px;}
-        .ex-input-check *{vertical-align:middle}
-        .ex-input-check:after{width:0;height:0;content:'';background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_chk_agree_checked.png);background-repeat: no-repeat;background-size:20px;}
-        .ex-input-check label{font-size:15px;vertical-align:0}
-        .ex-input-check label em{vertical-align:0!important}
-        .ex-input-check input{line-height:1;position:absolute;top:0;left:0;display:inline-block;width:20px;height:20px;padding:0;border:0;border-radius:0;outline:0;background-repeat: no-repeat;background-size:18px;border:1px solid #ddd;-webkit-appearance:none;-moz-appearance:none;appearance:none}
-        .ex-input-check input:checked{background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_chk_agree_checked.png);}
-        .ex-input-check input:checked+label{font-weight:700;color:#343c3d}
-        .ex-input-check input:disabled{background-color:#f5f5f5;background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_checkbox_disabled.png);}
-        .ex-input-check input:disabled:checked{background-image:url(/pc/AsianPlatformInternet/images/internet/common/consulting/bg_chk_agree_default.png);}
-        .ex-input-check input:disabled+label{color:#999}
-        .ex-input-check input:focus{outline:#000 dotted 0}
-        .ex-input-check input:checked:focus{outline:#000 dotted 0}
-        .ex-input-check input:checked:focus+label{font-weight:700;color:#343c3d}
-        .ex-input-check input:checked:focus+label:before{outline:#000 dotted 0}
-
-        pre[class*=language-] { background: #2d2d2d; padding: 20px; }
-        pre[class*=language-] * { color: #ccc; font-family: 'Source Code Pro', 'Noto Sans KR', monospace; line-height: 1.5; font-size: 14px; }
-        .token.block-comment, .token.cdata, .token.comment, .token.doctype, .token.prolog { color: #999; }
-        .token.attr-name, .token.deleted, .token.namespace, .token.tag { color: #e2777a; }
-        .token.attr-value, .token.char, .token.regex, .token.string, .token.variable { color: #7ec699; }
-
-        .is-aside-closed .g-aside {transform:translateX(-102%); -webkit-transform:translateX(-102%); -moz-transform:translateX(-102%); -ms-transform:translateX(-102%); -o-transform:translateX(-102%);}
-        .is-aside-closed .g-content {padding-left:0;}
+        .cl-table {  }
+        .cl-table table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+        .cl-table table thead {  }
+        .cl-table table thead tr {  }
+        .cl-table table thead tr th { padding: 12px 10px; border-top: 1px solid #d2d2d2; border-bottom: 1px solid #d2d2d2; background: #c7deff; }
+        .cl-table table thead tr th + th { border-left: 1px solid #d2d2d2; }
+        .cl-table table tbody {  }
+        .cl-table table tbody tr {  }
+        .cl-table table tbody tr td { padding: 8px 10px; border-bottom: 1px solid #d2d2d2; }
+        .cl-table table tbody tr td + td { border-left: 1px solid #d2d2d2; }
+        .cl-table table tbody tr.platform td { font-size: 18px; font-weight: bold; background: #E5F0FF; color: #00008F; padding-left: 25px; }
+        .cl-table table tbody tr.not-work td { background: #f8f8f8; }
+        .cl-table table tbody tr:hover td { background: #f3f3f3; }
+        .cl-table table tbody tr td.cl-cell-depth01,
+        .cl-table table tbody tr td.cl-cell-depth02,
+        .cl-table table tbody tr td.cl-cell-depth03,
+        .cl-table table tbody tr td.cl-cell-depth04,
+        .cl-table table tbody tr td.cl-cell-depth05,
+        .cl-table table tbody tr td.cl-cell-directory,
+        .cl-table table tbody tr td.cl-cell-filename { text-align: left; }
+        .cl-cell-depth04,
+        .cl-cell-depth05 { display: none; }
+        .btn-cl-top {visibility: hidden; width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; position: fixed; bottom: 20px; right: 20px; background: rgb(0 0 0 / 22%); color: #000; font-size: 10px; z-index: 3; }
+        .btn-cl-top:hover { background: #00008F; color: #fff; }
+        .scrolled .btn-cl-top{visibility: visible;}
     </style>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="mo/mobdblcms/script/jquery.js"></script>
     <script>
-        $(function () {        
-            $('.g-btn-aside').click(function(){
-                if($('.g-container').hasClass('is-aside-closed')){
-                    $('.g-container').removeClass('is-aside-closed');
-                } else {
-                    $('.g-container').addClass('is-aside-closed');
-                }
-            })
-            $('.g-snb>li').click(function(){
-                var index = $(this).index();
-                var offset = $('.g-content-item').eq(index).offset();
-                if($(this).hasClass('on')){
-                } else {
-                    $('.g-snb>li').removeClass('on');
-                    $(this).addClass('on');
-                }
-                $('html, body').animate({scrollTop: offset.top},300);
-            })
-            $('.g-inner-snb>li').click(function(){
-                var innerIndex = $(this).index();
-                var innerOffset = $('.g-style-list').eq(innerIndex).offset();
-                if($(this).hasClass('on')){
-                } else {
-                    $('.g-inner-snb>li').removeClass('on');
-                    $(this).addClass('on');
-                    $('html, body').animate({scrollTop: innerOffset.top - 140},300);
+        $(function () {
+            var nbs = $('.cl-cell-status').length;
+            for(var i = 0; i<nbs; i++){
+                cell = $('.cl-cell-status').eq(i).siblings();
+                cell.eq(0).addClass('cl-cell-depth01');
+                cell.eq(1).addClass('cl-cell-depth02');
+                cell.eq(2).addClass('cl-cell-depth03');
+                cell.eq(3).addClass('cl-cell-depth04');
+                cell.eq(4).addClass('cl-cell-depth05');
+                cell.eq(5).addClass('cl-cell-id');
+                cell.eq(6).addClass('cl-cell-directory');
+                cell.eq(7).addClass('cl-cell-filename');
+                cell.eq(8).addClass('cl-cell-worker');
+                cell.eq(9).addClass('cl-cell-end');
+            }
+            // 페이지 수 정보
+            // (-) 대쉬로 표시된 파일들은 카운트 하지 않음
+            var noCount = $('td.cl-cell-status:contains(-)').length;
+            var endCount = $('td.cl-cell-status:contains(완료)').length;
+            var ingCount = $('td.cl-cell-status:contains(진행중), td.cl-cell-status:contains(검수중), td.cl-cell-status:contains(기획검수)').length;
+            var allCountFull = $('td.cl-cell-status').length;
+            var allCount = allCountFull - noCount;
+            var percentCount = endCount / allCount * 100;
+
+            $('.ui-all-number').text(allCount);
+            $('.ui-ing-number').text(ingCount);
+            $('.ui-end-number').text(endCount);
+            $('.ui-percent-number').text(percentCount.toFixed(0)+'%');
+
+            console.log('페이지수 제외항목 = ' + noCount);
+            console.log('완료 페이지 = ' + endCount);
+            console.log('진행중 페이지 = ' + ingCount);
+            console.log('전체 페이지(제외항목 뺀 숫자) = ' + allCount);
+            console.log('전체 Table rows = ' + allCountFull);
+
+            //select 바로가기
+            $('#tdSelect').on('change', function(){
+                var tar = $('#tdSelect').val();
+                var offset = $('#'+$('#tdSelect').val()).offset();
+                if($('body').hasClass('scrolled')){
+                    $('html, body').animate({scrollTop: offset.top-60},400);
+                }else{
+                    $('html, body').animate({scrollTop: offset.top-222},400);
                 }
             })
         });
         //scroll header
-        // $(window).scroll(function(){
-        //    var scltop = $(window).scrollTop();
-        //    $('.g-content-item').each(function(idx){
-        //         var target = $('.g-content-item').eq(idx);
-        //             i = target.index();
-        //             targetTop = target.offset().top;
-
-        //         if (targetTop <= scltop) {
-        //             $('.g-snb>li').removeClass('on');
-        //             $('.g-snb>li').eq(idx).addClass('on');
-        //         }
-        //    });
-        // })
-    </script>
+        $(window).scroll(function(){
+            if($(window).scrollTop() > 100){
+                $('body').addClass('scrolled')
+            }else{
+                $('body').removeClass('scrolled')
+            }
+        })
     </script>
 </head>
-<body id="g-content-top">
-    <header class="g-header g-in-sec">
-        <button type="button" class="g-btn-aside"><span>Menu</span></button>
-        <h1 class="g-logo"><a href="/"><b>AXA 스마트보장분석 구축</b> 프로젝트 퍼블리싱가이드</a></h1>
-    </header>
-    <div class="g-container">
-        <div class="g-aside">
-            <ul class="g-snb">
-                <li class="on"><a href="javascript:void(0);">기본환경</a></li>
-                <li><a href="javascript:void(0);">표준규칙</a></li>
-                <li><a href="javascript:void(0);">코드규칙</a></li>
-                <li>
-                    <a href="javascript:void(0);">스타일가이드</a>
-                    <ul class="g-inner-snb">
-                        <li><a href="javascript:void(0);">Color</a></li>
-                        <li><a href="javascript:void(0);">Typography</a></li>
-                        <li><a href="javascript:void(0);">Button</a></li>
-                        <li><a href="javascript:void(0);">Text Field</a></li>
-                        <li><a href="javascript:void(0);">Form</a></li>
-                    </ul>
-                </li>
-            </ul>
+<body id="cl-content-top">
+    <a href="#cl-content-top" class="btn-cl-top">TOP</a>
+    <div class="cl-info-area">
+        <h1 class="project-tit">AXA 스마트보장분석 구축 프로젝트</h1>
+        <div class="cl-info-group">
+            <span class="cl-info">전체 : </span>
+            <span class="cl-info ui-all-number"></span>
+            <span class="cl-info"> / 진행중 : </span>
+            <span class="cl-info ui-ing-number"></span>
+            <span class="cl-info"> / 완료 : </span>
+            <span class="cl-info ui-end-number"></span>
+            <span class="cl-info"> / 진행률 : </span>
+            <span class="cl-info ui-percent-number"></span>
         </div>
-        <div class="g-content">
-            <div class="g-content-item">
-                <div class="g-content-header">기본환경</div>
-                <div class="g-content-body">
-                    <section class="g-section">
-                        <div class="g-section-header">프로젝트 환경</div>
-                        <div class="g-section-body">
-                            <table class="g-section-tb">
-                                <colgroup>
-                                    <col style="width: 15%;">
-                                    <col>
-                                </colgroup>
-                                <tbody>
-                                    <tr>
-                                        <th>문서 및 버전</th>
-                                        <td>HTML5, CSS3, JavaScript</td>
-                                    </tr>
-                                    <tr>
-                                        <th>인코딩</th>
-                                        <td>UTF-8</td>
-                                    </tr>
-                                    <tr>
-                                        <th>웹 유형</th>
-                                        <td>PC, Mobile</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    <section class="g-section">
-                        <div class="g-section-header">파일/폴더 규칙</div>
-                        <div class="g-section-body">
-                            <div>
-                                <h3 class="g-section-tb-tit">PC</h3>
-                                <table class="g-section-tb">
-                                    <colgroup>
-                                        <col style="width: 15%;">
-                                        <col>
-                                        <col style="width: 20%;">
-                                        <col style="width: 20%;">
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>분류 폴더</th>
-                                            <th>서브 폴더</th>
-                                            <th>파일 이름</th>
-                                            <th>파일 설명</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="tac">CSS</td>
-                                            <td>/AsianPlatformInternet/css/internet</td>
-                                            <td>consulting.css</td>
-                                            <td>스타일</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tac">JS</td>
-                                            <td>/APInternetWAS/consulting</td>
-                                            <td>consulting.js</td>
-                                            <td>스크립트</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tac">img</td>
-                                            <td>/AsianPlatformInternet/images/internet/common/consulting</td>
-                                            <td>images, icons</td>
-                                            <td>이미지, 아이콘</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div>
-                                <h3 class="g-section-tb-tit">MO</h3>
-                                <table class="g-section-tb">
-                                    <colgroup>
-                                        <col style="width: 15%;">
-                                        <col>
-                                        <col style="width: 20%;">
-                                        <col style="width: 20%;">
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>분류 폴더</th>
-                                            <th>서브 폴더</th>
-                                            <th>파일 이름</th>
-                                            <th>파일 설명</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="tac">CSS</td>
-                                            <td>/mobdblcms/css</td>
-                                            <td>ui_consulting.css</td>
-                                            <td>스타일</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tac">JS</td>
-                                            <td>/mobdblcms/script</td>
-                                            <td>ui_consulting.css</td>
-                                            <td>스크립트</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tac">img</td>
-                                            <td>/mobdblcms/images</td>
-                                            <td>images, icons</td>
-                                            <td>이미지, 아이콘</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div class="g-content-item">
-                <div class="g-content-header">표준규칙</div>
-                <div class="g-content-body">
-                    <section class="g-section">
-                        <div class="g-section-header">기본문서</div> 
-                        <div class="g-section-body">
-                            <pre class="language-markup" tabindex="0"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ko<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Content-Type<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/html; charset=utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge;Chromeframe=1<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>keywords<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>description<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>shortcut icon<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image/x-icon<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:title<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:url<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:description<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:image<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>페이지명 | 사이트명<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/css<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code>
-                            </pre>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div class="g-content-item">
-                <div class="g-content-header">코드규칙</div>
-                <div class="g-content-body">
-                    <section class="g-section">
-                        <div class="g-section-header">HTML 규칙</div>
-                        <div class="g-section-body">
-                            <ul class="rule_code">
-                                <li><span class="code_label">a</span> 태그 안에 <span class="code_label">button</span> 태그를 넣는 등 인터랙티브 요소에 인터랙티브 요소를 넣지 않도록 한다.</li>
-                                <li><span class="code_label">button</span> 태그에는 <span class="code_label">type</span>을 명시한다.</li>
-                                <li>단락이 아닌 경우, 단순히 block 속성을 사용하기 위해서 <span class="code_label">p</span> 태그를 사용하지 않는다.</li>
-                                <li>레이아웃을 표현하기 위하여 표를 사용하지 않는다.</li>
-                                <li>ID는 개발을 위해서만 사용하고, 퍼블리싱 작업시에는 클래스를 활용한다.</li>
-                                <li>불가피한 경우를 제외하고 클래스명은 직관적으로 짓는다.</li>
-                                <li>CSS 클래스 단어와 단어 사이는 언더바( _ ) 로 구분한다.</li>
-                                <li>1탭 들여쓰기 하며, 1탭의 크기는 공백 4칸으로 설정한다.</li>
-                                <li>시작과 끝의 구분이 필요한 경우 <span class="code_label">&#60;!-- 내용 --&#62;</span>와 <span class="code_label">&#60;!-- //내용 --&#62;</span>으로 구분한다.</li>
-                                <li>수정한 영역의 구분이 필요한 경우 <span class="code_label">&#60;!-- yyyy-mm-dd : 수정 --&#62;</span>으로 구분한다.</li>
-                            </ul>
-                        </div>
-                    </section>
-                    <section class="g-section">
-                        <div class="g-section-header">CSS 규칙</div>
-                        <div class="g-section-body">
-                            <ul class="rule_code">
-                                <li>모든 속성은 영문 소문자로만 작성한다.</li>
-                                <li>약식으로 사용할 수 있는 경우 약식으로 작성한다.</li>
-                                <li>컬러값은 단축 가능하다면 단축한 값으로 기재한다. (ex. <span class="code_label">#fff</span>)</li>
-                                <li>태그는 언제든지 다른 태그로 변경될 수 있으므로 태그 선택자로 스타일을 작성하지 않는다.</li>
-                                <li>인라인 스타일의 우선 순위가 높으므로 인라인 스타일의 사용은 최소한으로 한다.</li>
-                                <li><span class="code_label">!important</span>는 불가피한 상황을 제외하고는 사용하지 않는다.</li>
-                                <li>클래스명이 자주 쓰이는 명칭일 경우 선택자를 하나, 두 개 정도 추가 작성한다.</li>
-                                <li>코드 그룹 간 1줄의 빈 줄을 허용한다. 단, 1줄을 초과하지 않는다.</li>
-                            </ul>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div class="g-content-item">
-                <div class="g-content-header">스타일가이드</div>
-                <div class="g-content-body">
-                    <section class="g-section">
-                        <div class="g-section-header">Color</div>
-                        <div class="g-section-body g-style-list">
-                            <div class="g-style-item">
-                                <h3 class="g-style-tit">Primary Color</h3>
-                                <div class="g-style-colors">
-                                    <div class="g-style-color c-00008F">
-                                        <div class="g-style-color-explain">AXA Blue 1<br/>#00008F</div>
-                                    </div>
-                                    <div class="g-style-color c-2B7DA7">
-                                        <div class="g-style-color-explain">AXA Blue 2<br/>#2B7DA7</div>
-                                    </div>
-                                    <div class="g-style-color c-2A98A8">
-                                        <div class="g-style-color-explain">AXA Blue 3<br/>#2A98A8</div>
-                                    </div>
-                                    <div class="g-style-color c-627F94">
-                                        <div class="g-style-color-explain">AXA Gray<br/>#627F94</div>
-                                    </div>
-                                    <div class="g-style-color c-FF1721">
-                                        <div class="g-style-color-explain">Red<br/>#FF1721</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="g-style-item">
-                                <h3 class="g-style-tit">Sub Color</h3>
-                                <h3 class="g-style-subtit">Accent Color</h3>
-                                <div class="g-style-colors">
-                                    <div class="g-style-color c-0F87C4">
-                                        <div class="g-style-color-explain">Text Color<br/>#0F87C4</div>
-                                    </div>
-                                    <div class="g-style-color c-FF9900">
-                                        <div class="g-style-color-explain">Text Color<br/>#FF9900</div>
-                                    </div>
-                                    <div class="g-style-color c-F55B5B">
-                                        <div class="g-style-color-explain">Text Color<br/>#F55B5B</div>
-                                    </div>
-                                </div>
-                                <h3 class="g-style-subtit">Light Color</h3>
-                                <div class="g-style-colors">
-                                    <div class="g-style-color c-E4EDFB">
-                                        <div class="g-style-color-explain">Light Color 1<br/>#E4EDFB</div>
-                                    </div>
-                                    <div class="g-style-color c-F5E6EC">
-                                        <div class="g-style-color-explain">Light Color 2<br/>#F5E6EC</div>
-                                    </div>
-                                    <div class="g-style-color c-DCEFF3">
-                                        <div class="g-style-color-explain">Light Color 3<br/>#DCEFF3</div>
-                                    </div>
-                                    <div class="g-style-color c-F9F7D8">
-                                        <div class="g-style-color-explain">Light Color 4<br/>#F9F7D8</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="g-style-item">
-                                <h3 class="g-style-tit">Grayscale Color</h3>
-                                <h3 class="g-style-subtit">Text Color</h3>
-                                <div class="g-style-colors">
-                                    <div class="g-style-color c-000000">
-                                        <div class="g-style-color-explain">Title<br/>#000000</div>
-                                    </div>
-                                    <div class="g-style-color c-343C3D">
-                                        <div class="g-style-color-explain">Body 1<br/>#343C3D</div>
-                                    </div>
-                                    <div class="g-style-color c-5F5F5F">
-                                        <div class="g-style-color-explain">Body 2<br/>#5F5F5F</div>
-                                    </div>
-                                    <div class="g-style-color c-999999">
-                                        <div class="g-style-color-explain">Caption<br/>#999999</div>
-                                    </div>
-                                </div>
-                                <h3 class="g-style-subtit">Background Color</h3>
-                                <div class="g-style-colors">
-                                    <div class="g-style-color c-FAFAFA">
-                                        <div class="g-style-color-explain">BG 1<br/>#FAFAFA</div>
-                                    </div>
-                                    <div class="g-style-color c-F5F5F5">
-                                        <div class="g-style-color-explain">BG 2<br/>#F5F5F5</div>
-                                    </div>
-                                </div>
-                                <h3 class="g-style-subtit">Border Color</h3>
-                                <div class="g-style-colors">
-                                    <div class="g-style-color c-DDDDDD">
-                                        <div class="g-style-color-explain">Border<br/>#DDDDDD</div>
-                                    </div>
-                                    <div class="g-style-color c-F0F0F0">
-                                        <div class="g-style-color-explain">Table<br/>#F0F0F0</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="g-style-item">
-                                <h3 class="g-style-tit">Label Color</h3>
-                                <div class="g-style-colors">
-                                    <div class="g-style-color c-E4F4FC">
-                                        <div class="g-style-color-explain-float">Text Color<br/>#0F87C4</div>
-                                        <div class="g-style-color-explain">BG Color<br/>#E4F4FC</div>
-                                    </div>
-                                    <div class="g-style-color c-FFF7E2">
-                                        <div class="g-style-color-explain-float">Text Color<br/>#FF9900</div>
-                                        <div class="g-style-color-explain">BG Color<br/>#FFF7E2</div>
-                                    </div>
-                                    <div class="g-style-color c-FFE2E2">
-                                        <div class="g-style-color-explain-float">Text Color<br/>#F55B5B</div>
-                                        <div class="g-style-color-explain">BG Color<br/>#FFE2E2</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="g-section">
-                        <div class="g-section-header">Typography</div>
-                        <div class="g-section-body g-style-list">
-                            <div class="g-style-item typo type">
-                                <h3 class="g-style-tit">Typeface</h3>
-                                <h3 class="g-style-subtit">Noto Sans CJK KR</h3>
-                                <div class="g-style-tb">
-                                    <table>
-                                        <colgroup>
-                                            <col style="width: 15%;">
-                                            <col>
-                                        </colgroup>
-                                        <tr>
-                                            <td class="typo-w-b">Bold</td>
-                                            <td class="typo-w-b">가나다라마바사아자차카타파하</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="typo-w-m">Medium</td>
-                                            <td class="typo-w-m">가나다라마바사아자차카타파하</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="typo-w-r">Regular</td>
-                                            <td class="typo-w-r">가나다라마바사아자차카타파하</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="g-style-item typo scale">
-                                <h3 class="g-style-tit">Scale</h3>
-                                <div class="g-style-tb">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Scale Category</th>
-                                                <th>Weight</th>
-                                                <th>Size</th>
-                                                <th>Line Height</th>
-                                                <th>Letter Spacing</th>
-                                                <th>Sample</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Headline 1<p class="s_txt">헤드라인</p></td>
-                                                <td>Bold</td>
-                                                <td>26(52)</td>
-                                                <td>34</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-1">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Headline 2<p class="s_txt">헤드라인</p></td>
-                                                <td>Bold</td>
-                                                <td>24(48)</td>
-                                                <td>32</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-2">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Headline 3<p class="s_txt">헤드라인</p></td>
-                                                <td>Bold</td>
-                                                <td>22(44)</td>
-                                                <td>30</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-3">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sub Headline<p class="s_txt">타이틀/CTA BTN</p></td>
-                                                <td>Medium/Bold</td>
-                                                <td>18(36)</td>
-                                                <td>26</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-4">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Body Large<p class="s_txt">본문/타이틀</p></td>
-                                                <td>Regular/Medium</td>
-                                                <td>16(32)</td>
-                                                <td>24</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-5">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Body Medium<p class="s_txt">본문/테이블(footnote)</p></td>
-                                                <td>Regular/Medium</td>
-                                                <td>15(30)</td>
-                                                <td>21</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-6">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Body Small<p class="s_txt">본문/테이블(footnote)</p></td>
-                                                <td>Regular</td>
-                                                <td>14(28)</td>
-                                                <td>20</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-7">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Caption<p class="s_txt">보조문구</p></td>
-                                                <td>Regular</td>
-                                                <td>12(24)</td>
-                                                <td>18</td>
-                                                <td>-3%</td>
-                                                <td class="typo-s-8">고객의 인생 파트너 AXA 다이렉트<br>1234567890!@#$%</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="g-section">
-                        <div class="g-section-header">Button</div>
-                        <div class="g-section-body g-style-list">
-                            <div class="g-style-item">
-                                <h3 class="g-style-tit">CTA(Call to action/H55)</h3>
-                                <h3 class="g-style-subtit">One Button</h3>
-                                <div class="ex-btn">
-                                    <button type="button">상담 예약</button>
-                                </div>
-                                <h3 class="g-style-subtit">Two Button</h3>
-                                <div class="ex-btn two_btn">
-                                    <button type="button">상담 예약</button>
-                                    <button type="button">전화 문의</button>
-                                </div>
-                            </div>
-                            <div class="g-style-item">
-                                <h3 class="g-style-tit">Medium(H48)</h3>
-                                <h3 class="g-style-subtit">Primary</h3>
-                                <div class="ex-btn medium">
-                                    <button type="button">버튼명</button>
-                                </div>
-                                <h3 class="g-style-subtit">Secondary</h3>
-                                <div class="ex-btn medium outline">
-                                    <button type="button">버튼명</button>
-                                </div>
-                                <h3 class="g-style-subtit">alert</h3>
-                                <div class="ex-btn medium two_btn">
-                                    <button type="button">취소</button>
-                                    <button type="button">확인</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="g-section">
-                        <div class="g-section-header">Text Field</div>
-                        <div class="g-section-body g-style-list">
-                            <div class="g-style-item input">
-                                <h3 class="g-style-tit">1 Text Field</h3>
-                                <div class="d-flex">
-                                    <div>
-                                        <h3 class="g-style-subtit">Default</h3>
-                                        <input type="text" name="" id="" class="ex-input" placeholder="이름을 입력해 주세요" style="width: 439px;">
-                                    </div>
-                                    <div>
-                                        <h3 class="g-style-subtit">Focused & Activated</h3>
-                                        <input type="text" name="" id="" class="ex-input focus" placeholder="이름을 입력해 주세요" value="홍길동" style="width: 439px;">
-                                    </div>
-                                    <div>
-                                        <h3 class="g-style-subtit">Filled</h3>
-                                        <input type="text" name="" id="" class="ex-input" placeholder="이름을 입력해 주세요" value="홍길동" style="width: 439px;">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="g-style-item input">
-                                <h3 class="g-style-tit">2 Text Field</h3>
-                                <div class="d-flex">
-                                    <div>
-                                        <h3 class="g-style-subtit">Default</h3>
-                                        <div class="two_input">
-                                            <input type="text" name="" id="" class="ex-input" placeholder="주민등록번호 앞 6자리">
-                                            <div class="dash"></div>
-                                            <input type="text" name="" id="" class="ex-input" placeholder="뒤 7자리">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3 class="g-style-subtit">Focused & Activated</h3>
-                                        <div class="two_input">
-                                            <input type="text" name="" id="" class="ex-input focus" placeholder="주민등록번호 앞 6자리" value="900000">
-                                            <div class="dash"></div>
-                                            <input type="text" name="" id="" class="ex-input focus" placeholder="뒤 7자리" value="0000000">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3 class="g-style-subtit">Filled</h3>
-                                        <div class="two_input">
-                                            <input type="text" name="" id="" class="ex-input" placeholder="주민등록번호 앞 6자리" value="900000">
-                                            <div class="dash"></div>
-                                            <input type="text" name="" id="" class="ex-input" placeholder="뒤 7자리" value="0000000">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="g-section">
-                        <div class="g-section-header">Form</div>
-                        <div class="g-section-body g-style-list">
-                            <div class="g-style-item radio">
-                                <h3 class="g-style-tit">Radio Button</h3>
-                                <div class="d-flex">
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Basic</h3>
-                                        <span class="ex-input-radio">
-                                            <input type="radio" id="exradio01" name="exradio01">
-                                            <label for="exradio01">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Checked</h3>
-                                        <span class="ex-input-radio">
-                                            <input type="radio" id="exradio01" name="exradio02" checked="">
-                                            <label for="exradio02">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Checked Disabled</h3>
-                                        <span class="ex-input-radio">
-                                            <input type="radio" id="exradio03" name="exradio03" checked="" disabled>
-                                            <label for="exradio03">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Disabled</h3>
-                                        <span class="ex-input-radio">
-                                            <input type="radio" id="exradio04" name="exradio04" disabled="">
-                                            <label for="exradio04">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="g-style-item radio">
-                                <h3 class="g-style-tit">Check Box</h3>
-                                <div class="d-flex">
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Basic</h3>
-                                        <span class="ex-input-check">
-                                            <input type="checkbox" id="excheck01" name="excheck01">
-                                            <label for="excheck01">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Checked</h3>
-                                        <span class="ex-input-check">
-                                            <input type="checkbox" id="excheck02" name="excheck02" checked="">
-                                            <label for="excheck02">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Checked Disabled</h3>
-                                        <span class="ex-input-check">
-                                            <input type="checkbox" id="excheck03" name="excheck03" checked="" disabled>
-                                            <label for="excheck03">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                    <div style="width: 200px;">
-                                        <h3 class="g-style-subtit">Disabled</h3>
-                                        <span class="ex-input-check">
-                                            <input type="checkbox" id="excheck04" name="excheck04" disabled="">
-                                            <label for="excheck04">텍스트입력</label>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
+        <div>
+            <label for="tdSelect">화면 검색</label>
+            <select name="tdSelect" id="tdSelect">
+                <option value="">화면명을 선택해 주세요.</option>
+                <option value="mobile">MOBILE</option>
+                <option value="pc">PC</option>
+                <option value="email">EMAIL</option>
+                <option value="app">APP</option>
+                <option value="tmpc">TM-PC</option>
+                <option value="tmmanager">TM-관리자</option>
+            </select>
+            <a href="components/index.html" target="_blank" class="cp-guide">Guide</a>
         </div>
+    </div>
+
+    <div class="cl-table">
+        <table>
+            <thead>
+                <th>Depth1</th>
+                <th>Depth2</th>
+                <th>Depth3</th>
+                <th class="cl-cell-depth04">Depth4</th>
+                <th class="cl-cell-depth05">Depth5</th>
+                <th>화면ID</th>
+                <th>화면경로</th>
+                <th>화면명</th>
+                <th>담당자</th>
+                <th>진행상태</th><!-- -/진행중/검수중/기획검수/완료 -->
+                <th>완료일</th>
+                <th>비고</th>
+            </thead>
+            <tbody>
+                <tr class="platform">
+                    <td colspan="11" id="mobile">MOBILE</td>
+                </tr>
+                <tr>
+                    <td>진입점(메인)</td>
+                    <td>슬라이드</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0000</td>
+                    <td>/mo/publishing/html/dmom/main/</td>
+                    <td><a href="mo/publishing/html/dmom/main/dmom_main_m.html" target="_blank">dmom_main_m.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/18</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>전체메뉴</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0000</td>
+                    <td>/mo/publishing/html/dmom/main/</td>
+                    <td><a href="mo/publishing/html/dmom/main/dmom_main_01_m.html" target="_blank">dmom_main_01_m.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/18</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>보장분석 소개</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPA0100</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_01_m.html" target="_blank">consulting_cal_01_m.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 내 정보 입력</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPO0200</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_01_01_p.html" target="_blank">consulting_cal_01_01_p.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 가입설계 및 상품소개 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_01_02_p.html" target="_blank">consulting_cal_01_02_p.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 실명인증 오류</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPO0201</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_01_03_p.html" target="_blank">consulting_cal_01_03_p.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td>본인인증</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td>휴대폰</td>
+                    <td>서비스 이용약관 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td></td>
+                    <td>통신사 이용약관 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td></td>
+                    <td>개인정보 수집/이용 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td></td>
+                    <td>고유식별정보 처리 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td>카카오페이</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td>신용카드</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td></td>
+                    <td>카드정보 입력</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>보장분석 결과</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPA0300</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_02_m.html" target="_blank">consulting_cal_02_m.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 내 가입 보험</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPO0301</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_02_01_p.html" target="_blank">consulting_cal_02_01_p.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 알럿_보장분석 이탈여부 컨펌</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_02_02_p.html" target="_blank">consulting_cal_02_02_p.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>보장분석 상세</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPA0400</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_03_m.html" target="_blank">consulting_cal_03_m.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 결과 발송</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPA0401</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_03_01_p.html" target="_blank">consulting_cal_03_01_p.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 알럿_유효하지 않은 휴대폰번호</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_03_02_p.html" target="_blank">consulting_cal_03_02_p.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 알럿_발송 완료</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_03_03_p.html" target="_blank">consulting_cal_03_03_p.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 결과 발송 보기</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMPA0402</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_03_04_p.html" target="_blank">consulting_cal_03_04_p.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 알럿_유효하지 않은 생년월일</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/consulting_cal_03_05_p.html" target="_blank">consulting_cal_03_05_p.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>9/25</td>
+                    <td></td>
+                </tr>
+                <tr class="platform" id="pc">
+                    <td colspan="11">PC</td>
+                </tr>
+                <tr>
+                    <td>진입점(메인)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0000</td>
+                    <td>/pc/AsianPlatformInternet/html/internet/</td>
+                    <td><a href="pc/AsianPlatformInternet/html/internet/index_type_2302.html" target="_blank">index_type_2302.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/13</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>보장분석 소개</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0100</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0100.html" target="_blank">CMPPA0100.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>종료팝업</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0001</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0001.html" target="_blank">CMPPO0001.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/01</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>내 정보 입력</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0200</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0200.html" target="_blank">CMPPA0200.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>실명인증 오류</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0201</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0201.html" target="_blank">CMPPO0201.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>개인정보 수집·이용 및 조회 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0202</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0202.html" target="_blank">CMPPA0202.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>소비자 권익보호에 관한 사항(필수)</td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0203</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0203.html" target="_blank">CMPPO0203.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>수집·이용에 관한 사항</td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0204</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0204.html" target="_blank">CMPPO0204.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>제공에 관한 사항</td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0205</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0205.html" target="_blank">CMPPO0205.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>조회에 관한 사항</td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0206</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0206.html" target="_blank">CMPPO0206.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>소비자 권익보호에 관한 사항(선택)</td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0207</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0207.html" target="_blank">CMPPO0207.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>수집·이용에 관한 사항</td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0208</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0208.html" target="_blank">CMPPO0208.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>인증수단 선택</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0209</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0209.html" target="_blank">CMPPA0209.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td>본인인증</td>
+                    <td>공동인증서</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="not-work">
+                    <td></td>
+                    <td>휴대폰</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status">-</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>카카오페이</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0208</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0208.html" target="_blank">CMPPA0208.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/01</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>카카오페이 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0210</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0210.html" target="_blank">CMPPO0210.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>로딩</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0208_dev3.html" target="_blank">CMPPA0208_dev3.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/20</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>보장분석 결과</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0300</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0300.html" target="_blank">CMPPA0300.html</a></td>
+                    <td>김윤서<br />이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/01</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>내 가입 보험</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0301</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0301.html" target="_blank">CMPPO0301.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>내 가입 보험</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0302</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0302.html" target="_blank">CMPPO0302.html</a></td>
+                    <td></td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/02</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>보장분석 상세</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPA0400</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPA0400.html" target="_blank">CMPPA0400.html</a></td>
+                    <td>김윤서<br />이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/01</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>보험 상담 신청</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></a></td>
+                    <td></td>
+                    <td class="cl-cell-status"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>결과 발송</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0401</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0401.html" target="_blank">CMPPO0401.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>결과 발송 보기</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMPPO0402</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/CMPPO0402.html" target="_blank">CMPPO0402.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/01</td>
+                    <td></td>
+                </tr>
+                <tr class="platform" id="email">
+                    <td colspan="11">EMAIL</td>
+                </tr>
+                <tr>
+                    <td>결과 발송(PC)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0207</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/TMPPA0207.html" target="_blank">TMPPA0207.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>생년월일 입력(PC)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0202</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/TMPPA0202.html" target="_blank">TMPPA0202.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>결과 보기(PC)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0206</td>
+                    <td>/pc/APInternetWAS/consulting/</td>
+                    <td><a href="pc/APInternetWAS/consulting/TMPPA0206.html" target="_blank">TMPPA0206.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>결과 발송(MOBILE)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0207</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/TMPPA0207.html" target="_blank">TMPPA0207.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>생년월일 입력(MOBILE)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0202</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/TMPPA0202.html" target="_blank">TMPPA0202.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>결과 보기(MOBILE)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0206</td>
+                    <td>/mo/mobdblweb/html/consulting/</td>
+                    <td><a href="mo/mobdblweb/html/consulting/TMPPA0206.html" target="_blank">TMPPA0206.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr class="platform" id="app">
+                    <td colspan="11">APP</td>
+                </tr>
+                <tr>
+                    <td>진입점</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CMMAP0000</td>
+                    <td>/mo/publishing/html/dmom/main/</td>
+                    <td><a href="mo/publishing/html/dmom/main/dmom_app_main_m.html" target="_blank">dmom_app_main_m.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>11/14</td>
+                    <td></td>
+                </tr>
+                <tr class="platform" id="tmpc">
+                    <td colspan="11">TM-PC</td>
+                </tr>
+                <tr>
+                    <td>진입점</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>개인정보 활용 동의</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>조회 결과 및 상세</td>
+                    <td>전체</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0200</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/JcotCicsGrntAnlzCotrInfoM.html" target="_blank">JcotCicsGrntAnlzCotrInfoM.html</a></td>
+                    <td>김윤서<br />이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/16</td>
+                    <td></td>
+                </tr>
+                
+                <tr>
+                    <td></td>
+                    <td>[P] 결과 발송</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0201</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/JcotCicsRsltSendP.html" target="_blank">JcotCicsRsltSendP.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/16</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>이메일 템플릿 발송</td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0201</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cl-cell-status"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>결과 발송</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0207</td>
+                    <td>/email/</td>
+                    <td><a href="email/TMPPA0207.html" target="_blank">TMPPA0207.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>생년월일 입력</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0202</td>
+                    <td>/email/</td>
+                    <td><a href="email/TMPPA0202.html" target="_blank">TMPPA0202.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>결과 보기</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0206</td>
+                    <td>/email/</td>
+                    <td><a href="email/TMPPA0206.html" target="_blank">TMPPA0206.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/30</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 내 가입 보험</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0203</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/JcotCicsMyEntrInsrP.html" target="_blank">JcotCicsMyEntrInsrP.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/16</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 보장분석 이력</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0204</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/JcotCicsGrntAnlzHisP.html" target="_blank">JcotCicsGrntAnlzHisP.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/16</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 보장분석 이력 상세</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0208</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/JcotCicsGrntAnlzDetailP.html" target="_blank">JcotCicsGrntAnlzDetailP.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/19</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[P] 당사 잔여한도</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>TMPPA0205</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/JcotCicsThcRestLimP.html" target="_blank">JcotCicsThcRestLimP.html</a></td>
+                    <td>이현주</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/16</td>
+                    <td></td>
+                </tr>
+                <tr class="platform" id="tmmanager">
+                    <td colspan="11">TM-관리자</td>
+                </tr>
+                <tr>
+                    <td>관리자</td>
+                    <td>보장분석 항목조회</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPA0101</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPA0101.HTML" target="_blank">MGPPA0101.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[구] 항목관리</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPA0101_1</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPA0101_1.HTML" target="_blank">MGPPA0101_1.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 항목정보 상세 - 항목 수정 선택 시</td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPO0101</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPO0101.html" target="_blank">MGPPO0101.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 항목정보 상세 - 항목 추가 선택 시</td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPO0102</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPO0102.html" target="_blank">MGPPO0102.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 신정원코드 정보 상세 - 신정원코드의 수정 선택 시</td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPO0103</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPO0103.html" target="_blank">MGPPO0103.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>추천금액 관리</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPA0201</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPA0201.HTML" target="_blank">MGPPA0201.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>[구] 보장분석 항목별 룰 관리</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPA0201_1</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPA0201_1.HTML" target="_blank">MGPPA0201_1.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 입력정보 상세 - 입력값 수정 선택 시</td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPO0201</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPO0201.html" target="_blank">MGPPO0201.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 입력정보 상세 - 신규 항목상세의 입력값 등록 시</td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPO0202</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPO0202.html" target="_blank">MGPPO0202.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>추천상품 관리</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPA0301</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPA0301.HTML" target="_blank">MGPPA0301.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 입력정보 상세 - 조건 수정 시(선택 클릭 시) </td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPO0301</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPO0301.html" target="_blank">MGPPO0301.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>[P] 입력정보 상세 - 신규정보 입력 시(등록 클릭 시)</td>
+                    <td></td>
+                    <td></td>
+                    <td>MGPPO0302</td>
+                    <td>/tm/ap_common/</td>
+                    <td><a href="tm/ap_common/MGPPO0302.html" target="_blank">MGPPO0302.html</a></td>
+                    <td>김윤서</td>
+                    <td class="cl-cell-status">완료</td>
+                    <td>10/23</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
